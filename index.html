@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>OURGYM | Inicio</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="keywords" content="" />
+
+	<link href="front/statics/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="front/statics/css/style.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="front/statics/css/memenu.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="front/statics/css/unslider.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="front/statics/css/unslider-dots.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="front/statics/css/ownstyle.css" rel="stylesheet" type="text/css" media="all" />
+
+	<!-- Archivos para hacer las cosas con estilo -->
+	<script src="front/statics/js/jquery.min.js"></script>
+	<script src="front/statics/js/bootstrap.js"> </script>
+	<!-- Popurris propios -->
+	<script src="front/statics/js/memenu.js"></script>
+	<script src="front/statics/js/controller.js"></script>
+	<script src="front/statics/js/header.js"></script>
+	<!-- Controladores de ventana y datos -->
+	<script src="front/logic/activity.js"></script>
+	<script src="front/logic/user.js"></script>
+	<script src="front/logic/exercise.js"></script>
+	<script src="front/logic/table.js"></script>
+</head>
+
+<body>
+
+	<!-- ................................................................... -->
+	<!-- ................................................................... -->
+	<!-- ................................................................... -->
+
+	<!-- MODAL LOGIN -->
+	<div class="modal fade" id="myModalLogin" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="myModalLabel">LOGIN</h4>
+				</div>
+				<div class="modal-body modal-evento">
+					<form id="login" class="form">
+						<div class="form-group">
+							<label for="edEmail">Email</label>
+							<input type="text" class="form-control" id="edEmail" name="edEmail" placeholder="email">
+						</div>
+						<div class="form-group">
+							<label for="edPass">Pass</label>
+							<input type="password" class="form-control" id="edPass" name="edPass" placeholder="pass">
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-success btn-registrar" data-dismiss="modal" onclick="LoginUser();">Login</button>
+					<button type="button" class="btn btn-default btn-cerrar" data-dismiss="modal">Cerrar</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- / MODAL LOGIN -->
+
+	<!-- MODAL LIST USERS -->
+	<div class="modal fade" id="myModalListUsers" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-toggle="modal" data-target="#myModalCreateAccount"><span aria-hidden="true">+</span></button>
+					<h4 class="modal-title" id="myModalLabel">USUARIOS</h4>
+				</div>
+				<div class="modal-body modal-evento" id="listUsers">
+					<!-- Inyeccion html por js -->
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- / MODAL LIST USERS -->
+
+	<!-- MODAL CREATE ACCOUNT -->
+	<div class="modal fade" id="myModalCreateAccount" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="myModalLabel">REGISTRO</h4>
+				</div>
+				<div class="modal-body modal-evento">
+					<form id="createAccount" class="form" method="POST">
+						<div class="form-group">
+							<label for="edCrName">Nombre</label>
+							<input type="text" class="form-control" id="edCrName" name="edCrName" placeholder="Nombre">
+						</div>
+						<div class="form-group">
+							<label for="edCrLastname1">Primer Apellido</label>
+							<input type="text" class="form-control" id="edCrLastname1" placeholder="Primer Apellido">
+						</div>
+						<div class="form-group">
+							<label for="edCrLastname2">Segundo Apellido</label>
+							<input type="text" class="form-control" id="edCrLastname2" placeholder="Segundo Apellido">
+						</div>
+						<div class="form-group">
+							<label for="edCrMail">Email</label>
+							<input type="email" class="form-control" id="edCrMail" placeholder="Email">
+						</div>
+						<div class="form-group">
+							<label for="edCrTelf">Tlfno</label>
+							<input type="email" class="form-control" id="edCrTelf" placeholder="988202122">
+						</div>
+						<div class="form-group">
+							<label for="edCrPass">Contraseña</label>
+							<input type="password" class="form-control" id="edCrPass" placeholder="Contraseña">
+						</div>
+						<div class="form-group">
+							<label for="edCrBirthday">Fecha Nacimiento</label>
+							<input type="text" class="form-control" id="edCrBirthday" placeholder="Fecha Nacimiento">
+						</div>
+						<div class="form-group">
+							<label for="edCrDirection">Direccion</label>
+							<input type="text" class="form-control" id="edCrDirection" placeholder="Direccion">
+						</div>
+						<div class="form-group">
+							<label for="edCrHeight">Altura (cm)</label>
+							<input type="text" class="form-control" id="edCrHeight" placeholder="Altura">
+						</div>
+						<div class="form-group">
+							<label for="edCrWeight">Peso (kg)</label>
+							<input type="text" class="form-control" id="edCrWeight" placeholder="Peso">
+						</div>
+						<div class="form-group">
+							<label for="edCrGen">Genero: </label>
+							<select class="form-control" type="text" id="edCrGen">
+								<option>Masculino</option>
+								<option>Femenino</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<label for="edCrAvatar">avatar URL</label>
+							<input type="text" class="form-control" id="edCrAvatar" placeholder="~/Documents/Images/imagen.png">
+						</div>
+						<div class="modal-footer">
+							<button type="submit" class="btn btn-success btn-registrar" data-dismiss="modal"onclick="NewUser();">Guardar</button>
+							<button type="button" class="btn btn-default btn-cerrar" data-dismiss="modal">Cerrar</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- / MODAL CREATE ACCOUNT -->
+
+	<!-- MODAL VIEW PROFILE -->
+	<div class="modal fade" id="myModalViewProfile" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="myModalLabel">DETALLE USUARIO</h4>
+				</div>
+				<div class="modal-body modal-evento">
+					<form id="viewProfile" class="form">
+						<div class="form-group">
+							<label for="edVpName">Nombre</label>
+							<input  type="text" class="form-control" id="edVpName">
+						</div>
+						<div class="form-group">
+							<label for="edVpLastname1">Primer Apellido</label>
+							<input  type="text" class="form-control" id="edVpLastname1">
+						</div>
+						<div class="form-group">
+							<label for="edVpLastname2">Segundo Apellido</label>
+							<input  type="text" class="form-control" id="edVpLastname2">
+						</div>
+						<div class="form-group">
+							<label for="edVpMail">Email</label>
+							<input disabled type="email" class="form-control" id="edVpMail">
+						</div>
+						<div class="form-group">
+							<label for="edVpTelf">Tlfno</label>
+							<input type="email" class="form-control" id="edVpTelf" placeholder="988202122">
+						</div>
+						<div class="form-group">
+							<label for="edVpPass">Contraseña</label>
+							<input disabled type="password" class="form-control" id="edVpPass">
+						</div>
+						<div class="form-group">
+							<label for="edVpBirthday">Fecha Nacimiento</label>
+							<input  type="text" class="form-control" id="edVpBirthday">
+						</div>
+						<div class="form-group">
+							<label for="edVpDirection">Direccion</label>
+							<input type="text" class="form-control" id="edVpDirection" placeholder="Direccion">
+						</div>
+						<div class="form-group">
+							<label for="edVpHeight">Altura (cm)</label>
+							<input  type="text" class="form-control" id="edVpHeight">
+						</div>
+						<div class="form-group">
+							<label for="edVpWeight">Peso (kg)</label>
+							<input  type="text" class="form-control" id="edVpWeight">
+						</div>
+						<div class="form-group">
+							<label for="edVpGen">Genero: </label>
+							<select class="form-control" type="text" name="posicion" id="edVpGen">
+								<option>Masculino</option>
+								<option>Femenino</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<label for="edVpAvatar">avatar URL</label>
+							<input  type="text" class="form-control" id="edVpAvatar">
+						</div>
+						<div class="modal-footer">
+							<button type="submit" class="btn btn-success btn-registrar" data-dismiss="modal" onclick="UpdateAndFillUser();">Guardar</button>
+							<button type="button" class="btn btn-danger" data-dismiss="modal" onclick="DeleteUser();">Borrar</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- / MODAL VIEW PROFILE -->
+
+	<!-- ................................................................... -->
+	<!-- ................................................................... -->
+
+	<!-- ... EXERCISE MODALS ... -->
+
+	<!-- MODAL LIST EXERCISES -->
+	<div class="modal fade" id="myModalListExercises" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-toggle="modal" data-target="#myModalCreateExercise" aria-label="Add"><span aria-hidden="true">+</span></button>
+					<h4 class="modal-title" id="myModalLabel">EJERCICIOS</h4>
+				</div>
+				<div class="modal-body modal-evento" id="listExercises">
+					<!-- Inyeccion html por js -->
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- / MODAL LIST EXERCISES -->
+
+	<!-- MODAL VIEW EXERCISE -->
+	<div class="modal fade" id="myModalExerciseDetail" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="myModalLabel">DETALLE EJERCICIO</h4>
+				</div>
+				<div class="modal-body modal-evento">
+					<form id="createExercise" class="form" method="POST">
+						<div hidden="true" class="form-group">
+							<label for="edVzExeID">ID</label>
+							<input disable type="text" class="form-control" id="edVzExeID" >
+						</div>
+						<div class="form-group">
+							<label for="edVzExeName">Nombre</label>
+							<input type="text" class="form-control" id="edVzExeName" >
+						</div>
+						<div class="form-group">
+							<label for="edVzExeCategory">Categoria</label>
+							<input type="text" class="form-control" id="edVzExeCategory" >
+						</div>
+						<div class="form-group">
+							<label for="edVzExeDesc">Descripcion</label>
+							<input type="text" class="form-control" id="edVzExeDesc" >
+						</div>
+						<div class="form-group">
+							<label for="edVzExeImg">Img</label>
+							<input type="text" class="form-control" id="edVzExeImg" >
+						</div>
+						<div class="form-group">
+							<label for="edVzExeTutorial">Tutorial</label>
+							<input type="text" class="form-control" id="edVzExeTutorial" >
+						</div>
+						<div class="modal-footer">
+							<button type="submit" class="btn btn-success btn-registrar" data-dismiss="modal"onclick="UpdateAndFillExercise();">Guardar</button>
+							<button type="submit" class="btn btn-danger" data-dismiss="modal"onclick="DeleteExercise();">Borrar</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- / MODAL VIEW EXERCISE -->
+
+	<!-- MODAL CREATE EXERCISE -->
+	<div class="modal fade" id="myModalCreateExercise" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="myModalLabel">NUEVO EJERCICIO</h4>
+				</div>
+				<div class="modal-body modal-evento">
+					<form id="createExercise" class="form" method="POST">
+						<div class="form-group">
+							<label for="edCrExeName">Nombre</label>
+							<input type="text" class="form-control" id="edCrExeName" placeholder="Abs laterales...">
+						</div>
+						<div class="form-group">
+							<label for="edCrExeCategory">Categoria</label>
+							<input type="text" class="form-control" id="edCrExeCategory" placeholder="Abdominales...">
+						</div>
+						<div class="form-group">
+							<label for="edCrExeDesc">Descripcion</label>
+							<input type="email" class="form-control" id="edCrExeDesc" placeholder="Esto hace aquello...">
+						</div>
+						<div class="form-group">
+							<label for="edCrExeImg">Img</label>
+							<input type="text" class="form-control" id="edCrExeImg" placeholder="~/Docs/imgs/fuerza.jpg">
+						</div>
+						<div class="form-group">
+							<label for="edCrExeTutorial">Tutorial</label>
+							<input type="text" class="form-control" id="edCrExeTutorial" placeholder="Youtu.be/3405798">
+						</div>
+						<div class="modal-footer">
+							<button type="submit" class="btn btn-success btn-registrar" data-dismiss="modal"onclick="NewExercise();">Guardar</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- / MODAL CREATE EXERCISE -->
+
+	<!-- / ... EXERCISE MODALS ... -->
+
+	<!-- ................................................................... -->
+	<!-- ................................................................... -->
+
+	<!-- ... TABLE MODALS ... -->
+
+	<!-- MODAL LIST TABLES -->
+	<div class="modal fade" id="myModalListTables" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-toggle="modal" data-target="#myModalCreateTable" aria-label="Add"><span aria-hidden="true">+</span></button>
+					<h4 class="modal-title" id="myModalLabel">TABLAS</h4>
+				</div>
+				<div class="modal-body modal-evento" id="listTables">
+					<!-- Inyeccion html por js -->
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- / MODAL LIST TABLES -->
+
+	<!-- MODAL VIEW TABLE -->
+	<div class="modal fade" id="myModalTableDetail" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="myModalLabel">DETALLE TABLA</h4>
+				</div>
+				<div class="modal-body modal-evento">
+					<form id="createExercise" class="form" method="POST">
+						<div hidden="true" class="form-group">
+							<label for="edVzTableID">ID</label>
+							<input disable type="text" class="form-control" id="edVzTableID" >
+						</div>
+						<div class="form-group">
+							<label for="edVzTableName">Nombre</label>
+							<input type="text" class="form-control" id="edVzTableName" >
+						</div>
+						<div class="form-group">
+							<label for="edVzTableDiff">Dificultad</label>
+							<input type="text" class="form-control" id="edVzTableDiff" >
+						</div>
+						<div class="form-group">
+							<label for="edVzTableDesc">Descripcion</label>
+							<input type="text" class="form-control" id="edVzTableDesc" >
+						</div>
+						<div class="modal-footer">
+							<button type="submit" class="btn btn-success btn-registrar" data-dismiss="modal"onclick="UpdateAndFillTable();">Guardar</button>
+							<button type="submit" class="btn btn-danger" data-dismiss="modal"onclick="DeleteTable();">Borrar</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- / MODAL VIEW TABLE -->
+
+	<!-- MODAL CREATE TABLE -->
+	<div class="modal fade" id="myModalCreateTable" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="myModalLabel">NUEVA TABLA</h4>
+				</div>
+				<div class="modal-body modal-evento">
+					<form id="createExercise" class="form" metod="POST">
+						<div class="form-group">
+							<label for="edCrTableName">Nombre</label>
+							<input type="text" class="form-control" id="edCrTableName" placeholder="Cardio intenso...">
+						</div>
+						<div class="form-group">
+							<label for="edCrTableDiff">Dificultad</label>
+							<input type="text" class="form-control" id="edCrTableDiff" placeholder="Alta, Baja, Media...">
+						</div>
+						<div class="form-group">
+							<label for="edCrTableDesc">Descripcion</label>
+							<input type="email" class="form-control" id="edCrTableDesc" placeholder="Esto hace aquello...">
+						</div>
+						<div class="modal-footer">
+							<button type="submit" class="btn btn-success btn-registrar" data-dismiss="modal"onclick="NewTable();">Guardar</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- / MODAL CREATE TABLE -->
+
+	<!-- / ... TABLE MODALS ... -->
+
+	<!-- ................................................................... -->
+	<!-- ................................................................... -->
+
+	<!-- ... SESSION MODALS ... -->
+
+	<!-- MODAL LIST SESSIONS -->
+	<div class="modal fade" id="myModalListSessionsUser" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title" id="myModalLabel">SESIONES</h4>
+				</div>
+				<div class="modal-body modal-evento" id="listSessionsUser">
+					<!-- Inyeccion html por js -->
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- / MODAL LIST SESSIONS -->
+
+	<!-- / ... SESSION MODALS ... -->
+
+	<!-- ................................................................... -->
+	<!-- ................................................................... -->
+
+	<!-- ... ACTIVITIES MODALS ... -->
+
+	<div class="modal fade" id="myModalListPromotions" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content" id="session-modaltwo">
+
+			</div>
+		</div>
+	</div>
+
+	<!-- / ... ACTIVITIES MODALS ... -->
+
+	<!-- ................................................................... -->
+	<!-- ................................................................... -->
+	<!-- ................................................................... -->
+
+	<!-- HEADER -->
+			<div class="logo myLogo">
+				<h1><a href="index.html">OURGYM</a></h1>
+			</div>
+			<div class="top-nav myTop" id="mainHeader">
+				<!-- AQUI SE ENCHUFAN LOS BOTONES -->
+			</div>
+			<!---->
+			<div class="clearfix"> </div>
+			<!---->
+		</div>
+	<!-- / HEADER -->
+
+	<!-- SLIDER -->
+	<div class="my-slider">
+		<ul id="slideList">
+			<li>
+				<img src="front/statics/images/bnr.jpg" alt="">
+				<div class="info slide0">
+					<b>
+						OurGym es una red de gimnasios Low Cost que nace de la mano de Centro Deportivo ESEI,<br>
+						una instalación que se dedica al sector de la salud y el deporte que cuentan con más de 15 años de experiencia.<br>
+						Nuestro compromiso con la actividad física y la salud, la innovación y la atención a nuestros clientes nos lleva<br>
+						a brindarles el mejor producto, ofreciendo un gran servicio de actividades, maquinaria de última generación y un equipo<br>
+						de profesionales altamente cualificados, todo ello al mejor precio, sin contratos de permanencia y sin cargos adicionales.
+					</b>
+				</div>
+			</li>
+			<li>
+				<img src="front/statics/images/bnr2.jpg" alt="">
+				<div class="info slide1">
+					<b>
+						OurGym es una red de gimnasios Low Cost que nace de la mano de Centro Deportivo ESEI,<br>
+						una instalación que se dedica al sector de la salud y el deporte que cuentan con más de 15 años de experiencia.<br>
+						Nuestro compromiso con la actividad física y la salud, la innovación y la atención a nuestros clientes nos lleva<br>
+						a brindarles el mejor producto, ofreciendo un gran servicio de actividades, maquinaria de última generación y un equipo<br>
+						de profesionales altamente cualificados, todo ello al mejor precio, sin contratos de permanencia y sin cargos adicionales.
+					</b>
+				</div>
+			</li>
+		</ul>
+		<hr>
+	</div>
+	<!-- / SLIDER -->
+
+	<!-- CONTENT 1 -->
+	<div class="offers">
+		<div class="container">
+			<h3>Clases disponibles</h3>
+			<div>
+					<div id="events-list">
+						<!--HERE-->
+					</div>
+			</div>
+		</div>
+	</div>
+	<!-- / CONTENT 1 -->
+
+	<!-- CONTENT 2 -->
+	<div class="offers">
+		<div class="container">
+			<h3>Clases especiales</h3>
+			<div id="offer-especial" class="items-sec">
+				<!--HERE-->
+			</div>
+			<div class="offer-grids">
+				<div class="col-md-6 grid-left">
+					<a href="#"><div class="offer-grid1">
+						<div class="ofr-pic">
+							<img src="front/statics/images/ofr.jpg" class="img-responsive" alt="Detective"/>
+						</div>
+						<div class="ofr-pic-info">
+							<h4>Clase patrocinada<br>Super Cool</h4>
+							<span>Descuento X%</span>
+							<p>Ver mas</p>
+						</div>
+						<div class="clearfix"></div>
+					</div></a>
+				</div>
+				<div class="col-md-6 grid-right">
+					<a href="#"><div class="offer-grid2">
+						<div class="ofr-pic-info2">
+							<h4>Clase patrodinada</h4>
+							<span>Hasta 30 asistentes</span>
+							<h5>Impresionante</h5>
+							<p>Ver mas</p>
+						</div>
+						<div class="ofr-pic2">
+							<img src="front/statics/images/ofr2.jpg" class="img-responsive" alt=""/>
+						</div>
+						<div class="clearfix"></div>
+					</div></a>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+		</div>
+	</div>
+	<!-- / CONTENT 2 -->
+
+	<!-- CONTENT 3 -->
+	<div class="offers">
+		<div class="container">
+			<h3>MASCOTA</h3>
+			<div class="offer-grids">
+				<div class="col-md-3 grid-left"></div>
+				<div class="col-md-6 grid-left">
+					<div class="offer-grid1 text-center ">
+						<img src="front/statics/images/bnr3.gif" alt="">
+					</div>
+				</div>
+				<div class="col-md-3 grid-left"></div>
+			</div>
+		</div>
+	</div>
+	<!-- / CONTENT 3 -->
+
+	<!-- FOOTER INFO -->
+	<div class="footer">
+		<div class="container">
+			<div class="footer-grids row center-block text-center">
+				<div class="col-md-12">
+					<h2><b>Sobre nosotros: </b>Fuertes por fuera y por dentro.</h2>
+					<p>Somos un proucto gestado en la asignatura de ABP, en Cuarto curso de Ingenieria Informatica.</p>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+		</div>
+	</div>
+	<!-- / FOOTER INFO -->
+
+	<!-- FOOTER LINKSBAR -->
+	<div class="copywrite">
+		<div class="container">
+			<div class="social row center-block text-center">
+				<a href="https://es-es.facebook.com/eseiuvigo/"><i class="facebook"></i></a>
+				<a href="https://twitter.com/eseiuvigo?lang=es"><i class="twitter"></i></a>
+				<a href="https://dribbble.com/shots/1741255-Run-Forrest-run"><i class="dribble"></i></a>
+				<a href="https://plus.google.com/communities/113202478878679649462"><i class="google"></i></a>
+				<a href="https://www.youtube.com/watch?v=cCLVTvst0Pw"><i class="youtube"></i></a>
+			</div>
+			<div class="clearfix"></div>
+		</div>
+	</div>
+	<!-- / FOOTER LINKSBAR -->
+
+	<!-- DEFERED JS CALLS -->
+	<script> initApp(); </script>
+	<script src="front/statics/js/unslider.js"></script>
+	<script>
+	$('.my-slider').unslider();
+	$('.busqueda').keypress(function(e) {
+		if(e.which == 13) {
+			search();
+		}
+	});
+	</script>
+	<!-- / DEFERED JS CALLS -->
+</body>
+</html>
